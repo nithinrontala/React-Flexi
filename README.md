@@ -122,6 +122,6 @@ Here’s an overview of the project structure:
     /images
     /icons
 
-    BlogPostList: Displays the list of blog posts.
+BlogPostList: Displays the list of blog posts.
 
-    BlogPostItem: Represents a single blog post with a title, summary, and date.
+BlogPostItem: Represents a single blog post with a title, summary, and date.
