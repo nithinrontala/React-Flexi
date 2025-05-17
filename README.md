@@ -4,7 +4,7 @@ Overview
 In this challenge, you will build a component to display a list of blog posts. The component will show the title, summary, and publication date for each post, while also being responsive to different screen sizes. The layout will change based on the viewport (single column on mobile, multiple columns on desktop). The component should be built using React, React Router, and CSS Modules.
 Features
 
-    Title: A clickable link to the full post.
+    Title:  A clickable link to the full post.
 
     Summary: A short preview of the post (50-100 words).
 
