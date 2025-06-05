@@ -12,16 +12,27 @@ const BlogPostDetail = ({ title, content, author, date }) => {
     year: 'numeric',
   });
 
+  // Ensure links open in new tab and are accessible
+  const createMarkup = (html) => ({
+    __html: html.replace(
+      /<a ([^>]*href=["']https?:\/\/[^"']+["'][^>]*)>/gi,
+      (match, p1) => `<a ${p1} target="_blank" rel="noopener noreferrer">`
+    ),
+  });
+
   return (
-    <div className={styles.blogPostDetail}>
+    <article className={styles.blogPostDetail}>
       <h1 className={styles.title}>{title}</h1>
-      <p className={styles.author}>By {author}</p>
-      <p className={styles.date}>Published on {formattedDate}</p>
+      <div className={styles.meta}>
+        <p className={styles.author}>By {author}</p>
+        <p className={styles.date}>Published on {formattedDate}</p>
+      </div>
       <div
         className={styles.content}
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={createMarkup(content)}
+        aria-label="Blog post content"
       />
-    </div>
+    </article>
   );
 };
 
