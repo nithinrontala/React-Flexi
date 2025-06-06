@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './BlogPostItem.module.css';
+import styles from './BlogPostList.module.css';
 
-const BlogPostList = ({ posts, cardMode }) => {
+const BlogPostList = ({ posts, cardMode, onEdit }) => {
   if (!posts || posts.length === 0) {
     return <div className={styles.empty}>No blog posts found.</div>;
   }
@@ -22,6 +22,12 @@ const BlogPostList = ({ posts, cardMode }) => {
                 </div>
               </div>
             </Link>
+            {onEdit && (
+              <button
+                style={{marginTop:'8px',background:'#007BFF',color:'#fff',border:'none',borderRadius:'4px',padding:'6px 14px',cursor:'pointer',float:'right'}}
+                onClick={e => { e.preventDefault(); onEdit(post.id); }}
+              >Edit</button>
+            )}
           </li>
         ))}
       </ul>
