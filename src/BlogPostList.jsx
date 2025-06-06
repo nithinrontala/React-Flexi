@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './BlogPostItem.module.css';
+import styles from './BlogPostList.module.css';
 
 const BlogPostList = ({ posts, cardMode }) => {
   if (!posts || posts.length === 0) {
