@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate, Link, useParams } from 'react-router-dom';
 import BlogPostList from './BlogPostList.jsx';
 import BlogPostPage from '../pages/BlogPostPage.jsx';
 import BlogPostForm from '../components/BlogPostForm.jsx';
@@ -50,11 +50,32 @@ function App() {
 			<header className="header">
 				<h1 className="headerTitle">Flexi Blog</h1>
 				<p className="headerSubtitle">A modern, responsive blog built with React & Vite</p>
+				<div style={{ textAlign: 'right', margin: '16px 0' }}>
+					<Link
+						to="/new"
+						style={{
+							background: '#007BFF',
+							color: '#fff',
+							padding: '8px 16px',
+							borderRadius: '4px',
+							textDecoration: 'none',
+							fontWeight: 'bold',
+						}}
+					>
+						+ Create New Post
+					</Link>
+				</div>
 			</header>
 			<main style={{ background: '#f5f6fa', minHeight: '100vh', padding: 0 }}>
 				<Routes>
-					<Route path="/" element={<BlogPostList posts={posts} cardMode={true} />} />
-					<Route path="/post/:id" element={<BlogPostPage posts={posts} cardMode={false} />} />
+					<Route
+						path="/"
+						element={<BlogPostList posts={posts} cardMode={true} onEdit={(id) => navigate(`/edit/${id}`)} />}
+					/>
+					<Route
+						path="/post/:id"
+						element={<BlogPostPage posts={posts} cardMode={false} onEdit={(id) => navigate(`/edit/${id}`)} />}
+					/>
 					<Route path="/new" element={<BlogPostForm onSubmit={handleCreate} />} />
 					<Route path="/edit/:id" element={<EditWrapper posts={posts} onEdit={handleEdit} />} />
 				</Routes>
@@ -64,7 +85,7 @@ function App() {
 }
 
 function EditWrapper({ posts, onEdit }) {
-	const { id } = require('react-router-dom').useParams();
+	const { id } = useParams();
 	const post = posts.find((p) => p.id === id);
 	if (!post) return <div style={{ textAlign: 'center', margin: '40px' }}>Post not found.</div>;
 	return <BlogPostForm post={post} onSubmit={(data) => onEdit(id, data)} />;

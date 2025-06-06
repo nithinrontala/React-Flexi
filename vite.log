@@ -1,0 +1,11 @@
+
+> blog-viewer@0.0.0 dev
+> vite
+
+11:09:26 PM [vite] (client) Re-optimizing dependencies because vite config has changed
+
+  VITE v6.3.5  ready in 682 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
