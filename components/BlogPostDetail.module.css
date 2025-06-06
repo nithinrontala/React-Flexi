@@ -1,0 +1,136 @@
+.blogPostDetail {
+  background: #f8f7f7;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06), 0 1.5px 4px rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  font-family: 'Arial', 'Roboto', sans-serif;
+  display: fit;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.meta {
+  display: fit;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 30px;
+  align-items: center;
+  text-align: center;
+}
+
+.author {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.date {
+  font-size: 16px;
+  color: #999;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.content {
+  font-size: 18px;
+  color: #333;
+  line-height: 1.6;
+  word-break: break-word;
+  text-align: center;
+}
+
+.content a {
+  color: #007BFF;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.content a:hover,
+.content a:focus {
+  color: #0056b3;
+}
+
+.notFound {
+  text-align: center;
+  color: #999;
+  font-size: 20px;
+  margin: 60px 0;
+}
+
+@media (max-width: 768px) {
+  .blogPostDetail {
+    padding: 20px;
+    margin: 20px 0;
+    align-items: center;
+    text-align: center;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+
+  .meta {
+    margin-bottom: 20px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .author {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .date {
+    font-size: 12px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .content {
+    font-size: 14px;
+    line-height: 1.4;
+    text-align: center;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1199px) {
+  .blogPostDetail {
+    padding: 32px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .meta {
+    margin-bottom: 24px;
+  }
+
+  .author {
+    font-size: 16px;
+  }
+
+  .date {
+    font-size: 14px;
+  }
+
+  .content {
+    font-size: 16px;
+  }
+}
