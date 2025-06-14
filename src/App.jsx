@@ -42,6 +42,11 @@ function App() {
 		navigate(`/post/${id}`);
 	};
 
+	// Delete post
+	const handleDelete = (id) => {
+		setPosts(posts.filter((post) => post.id !== id));
+	};
+
 	// Find post by id
 	const findPost = (id) => posts.find((post) => post.id === id);
 
@@ -70,7 +75,7 @@ function App() {
 				<Routes>
 					<Route
 						path="/"
-						element={<BlogPostList posts={posts} cardMode={true} onEdit={(id) => navigate(`/edit/${id}`)} />}
+						element={<BlogPostList posts={posts} cardMode={true} onEdit={(id) => navigate(`/edit/${id}`)} onDelete={handleDelete} />}
 					/>
 					<Route
 						path="/post/:id"
