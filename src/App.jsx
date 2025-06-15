@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useNavigate, Link, useParams } 
 import BlogPostList from './BlogPostList.jsx';
 import BlogPostPage from '../pages/BlogPostPage.jsx';
 import BlogPostForm from '../components/BlogPostForm.jsx';
+import Layout from './components/Layout';
 import './App.css';
 
 const initialPosts = [
@@ -51,7 +52,7 @@ function App() {
 	const findPost = (id) => posts.find((post) => post.id === id);
 
 	return (
-		<>
+		<Layout>
 			<header className="header">
 				<h1 className="headerTitle">Flexi Blog</h1>
 				<p className="headerSubtitle">A modern, responsive blog built with React & Vite</p>
@@ -85,7 +86,7 @@ function App() {
 					<Route path="/edit/:id" element={<EditWrapper posts={posts} onEdit={handleEdit} />} />
 				</Routes>
 			</main>
-		</>
+		</Layout>
 	);
 }
 
