@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './BlogPostDetail.module.css';
+import CommentList from '../src/components/CommentList';
+import CommentForm from '../src/components/CommentForm';
 
-const BlogPostDetail = ({ title, content, author, date }) => {
+const BlogPostDetail = ({ title, content, author, date, initialComments = [], isLoggedIn = false, userName = '' }) => {
   if (!title || !content || !author || !date) {
     return <p className={styles.notFound}>Blog post not found.</p>;
   }
@@ -20,6 +22,19 @@ const BlogPostDetail = ({ title, content, author, date }) => {
     ),
   });
 
+  // Comment system state
+  const [comments, setComments] = useState(initialComments);
+
+  const handleAddComment = (comment) => {
+    const newComment = {
+      ...comment,
+      date: new Date().toISOString(),
+      id: Date.now(),
+      avatar: undefined, // Add avatar logic if available
+    };
+    setComments(prev => [...prev, newComment]);
+  };
+
   return (
     <article className={styles.blogPostDetail}>
       <h1 className={styles.title}>{title}</h1>
@@ -32,6 +47,11 @@ const BlogPostDetail = ({ title, content, author, date }) => {
         dangerouslySetInnerHTML={createMarkup(content)}
         aria-label="Blog post content"
       />
+      <section className={styles.commentsSection} aria-label="Comments">
+        <h2 className={styles.commentsTitle}>Comments</h2>
+        <CommentList comments={comments} />
+        <CommentForm onSubmit={handleAddComment} isLoggedIn={isLoggedIn} userName={userName} />
+      </section>
     </article>
   );
 };
