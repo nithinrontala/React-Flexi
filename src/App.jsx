@@ -28,7 +28,6 @@ function App() {
 	const [searchTerm, setSearchTerm] = useState('');
 	const navigate = useNavigate();
 
-	// Create new post
 	const handleCreate = (data) => {
 		const newPost = {
 			...data,
@@ -38,18 +37,15 @@ function App() {
 		navigate('/');
 	};
 
-	// Edit post
 	const handleEdit = (id, data) => {
 		setPosts(posts.map((post) => (post.id === id ? { ...post, ...data } : post)));
 		navigate(`/post/${id}`);
 	};
 
-	// Delete post
 	const handleDelete = (id) => {
 		setPosts(posts.filter((post) => post.id !== id));
 	};
 
-	// Find post by id
 	const findPost = (id) => posts.find((post) => post.id === id);
 
 	const filteredPosts = posts.filter(
@@ -61,10 +57,29 @@ function App() {
 
 	return (
 		<Layout>
-			<header className="header">
-				<h1 className="headerTitle">Flexi Blog</h1>
-				<p className="headerSubtitle">A modern, responsive blog built with React & Vite</p>
-				<div style={{ margin: '24px 0', textAlign: 'center' }}>
+			<header
+				className="header"
+				style={{
+					background: '#282c34',
+					color: '#fff',
+					padding: '40px 20px',
+					boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+					textAlign: 'center',
+				}}
+			>
+				<h1
+					className="headerTitle"
+					style={{ fontSize: '3rem', fontWeight: '900', letterSpacing: '2px', marginBottom: '8px' }}
+				>
+					Flexi Blog
+				</h1>
+				<p
+					className="headerSubtitle"
+					style={{ fontSize: '1.25rem', fontWeight: '400', opacity: 0.85, marginBottom: '32px' }}
+				>
+					A modern, responsive blog built with React & Vite
+				</p>
+				<div style={{ margin: '24px 0' }}>
 					<input
 						type="search"
 						placeholder="Search posts by title, content, or author..."
@@ -72,34 +87,65 @@ function App() {
 						onChange={(e) => setSearchTerm(e.target.value)}
 						style={{
 							width: '60%',
-							padding: '12px',
-							borderRadius: '8px',
-							border: '1px solid #ddd',
+							maxWidth: '600px',
+							padding: '14px 20px',
+							borderRadius: '30px',
+							border: '1px solid #ccc',
+							boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+							fontSize: '1rem',
+							transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+						}}
+						onFocus={(e) => {
+							e.target.style.borderColor = '#007BFF';
+							e.target.style.boxShadow = '0 4px 12px rgba(0,123,255,0.3)';
+						}}
+						onBlur={(e) => {
+							e.target.style.borderColor = '#ccc';
+							e.target.style.boxShadow = '0 2px 6px rgba(0,0,0,0.1)';
 						}}
 						aria-label="Search posts"
 					/>
 				</div>
-				<div style={{ textAlign: 'right', margin: '16px 0' }}>
+				<div style={{ textAlign: 'right', margin: '16px 0', maxWidth: '60%', marginLeft: 'auto', marginRight: 'auto' }}>
 					<Link
 						to="/new"
 						style={{
 							background: '#007BFF',
 							color: '#fff',
-							padding: '8px 16px',
-							borderRadius: '4px',
+							padding: '12px 24px',
+							borderRadius: '30px',
 							textDecoration: 'none',
-							fontWeight: 'bold',
+							fontWeight: '700',
+							fontSize: '1.1rem',
+							boxShadow: '0 4px 12px rgba(0,123,255,0.4)',
+							transition: 'background-color 0.3s ease, box-shadow 0.3s ease',
+							display: 'inline-block',
+						}}
+						onMouseEnter={(e) => {
+							e.target.style.backgroundColor = '#0056b3';
+							e.target.style.boxShadow = '0 6px 16px rgba(0,86,179,0.6)';
+						}}
+						onMouseLeave={(e) => {
+							e.target.style.backgroundColor = '#007BFF';
+							e.target.style.boxShadow = '0 4px 12px rgba(0,123,255,0.4)';
 						}}
 					>
 						+ Create New Post
 					</Link>
 				</div>
 			</header>
-			<main style={{ background: '#f5f6fa', minHeight: '100vh', padding: 0 }}>
+			<main style={{ background: '#f5f6fa', minHeight: '100vh', padding: '20px 40px' }}>
 				<Routes>
 					<Route
 						path="/"
-						element={<BlogPostList posts={filteredPosts} cardMode={true} onEdit={(id) => navigate(`/edit/${id}`)} onDelete={handleDelete} />}
+						element={
+							<BlogPostList
+								posts={filteredPosts}
+								cardMode={true}
+								onEdit={(id) => navigate(`/edit/${id}`)}
+								onDelete={handleDelete}
+							/>
+						}
 					/>
 					<Route
 						path="/post/:id"
