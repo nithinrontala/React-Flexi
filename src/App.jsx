@@ -25,6 +25,7 @@ const initialPosts = [
 
 function App() {
 	const [posts, setPosts] = useState(initialPosts);
+	const [searchTerm, setSearchTerm] = useState('');
 	const navigate = useNavigate();
 
 	// Create new post
@@ -51,11 +52,33 @@ function App() {
 	// Find post by id
 	const findPost = (id) => posts.find((post) => post.id === id);
 
+	const filteredPosts = posts.filter(
+		(post) =>
+			post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			post.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+			post.author.toLowerCase().includes(searchTerm.toLowerCase())
+	);
+
 	return (
 		<Layout>
 			<header className="header">
 				<h1 className="headerTitle">Flexi Blog</h1>
 				<p className="headerSubtitle">A modern, responsive blog built with React & Vite</p>
+				<div style={{ margin: '24px 0', textAlign: 'center' }}>
+					<input
+						type="search"
+						placeholder="Search posts by title, content, or author..."
+						value={searchTerm}
+						onChange={(e) => setSearchTerm(e.target.value)}
+						style={{
+							width: '60%',
+							padding: '12px',
+							borderRadius: '8px',
+							border: '1px solid #ddd',
+						}}
+						aria-label="Search posts"
+					/>
+				</div>
 				<div style={{ textAlign: 'right', margin: '16px 0' }}>
 					<Link
 						to="/new"
@@ -76,7 +99,7 @@ function App() {
 				<Routes>
 					<Route
 						path="/"
-						element={<BlogPostList posts={posts} cardMode={true} onEdit={(id) => navigate(`/edit/${id}`)} onDelete={handleDelete} />}
+						element={<BlogPostList posts={filteredPosts} cardMode={true} onEdit={(id) => navigate(`/edit/${id}`)} onDelete={handleDelete} />}
 					/>
 					<Route
 						path="/post/:id"
